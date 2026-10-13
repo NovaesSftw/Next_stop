@@ -1,0 +1,43 @@
+/* Identidade visual do Next Stop: amarelo-sol, azul-marinho e branco, com formas arredondadas e "3D" de brinquedo. */
+:root {
+  color-scheme: light;
+
+  --sol: #ffc800;
+  --sol-claro: #ffe169;
+  --sol-fundo: #fff4c2;
+  --sol-borda: #e5a700;
+
+  --marinho: #14234b;
+  --marinho-2: #24386b;
+  --marinho-3: #43578a;
+  --marinho-borda: #0a1230;
+
+  --giz: #ffffff;
+  --fundo: #f4f6fb;
+  --linha: #dce2f0;
+  --linha-forte: #c5cee3;
+
+  --coral: #f2545b;
+  --coral-fundo: #ffe4e5;
+  --coral-botao: #c9303a;
+  --coral-borda: #9e2229;
+  --coral-texto: #b5242e;
+
+  --verde: #1db57a;
+  --verde-fundo: #d9f6e8;
+  --verde-botao: #0f8a5b;
+  --verde-borda: #0a6642;
+  --verde-texto: #0b7048;
+
+  --laranja: #f58a07;
+
+  --raio-s: 12px;
+  --raio-m: 18px;
+  --raio-g: 26px;
+
+  --fonte-titulo: 'Fredoka', 'Baloo 2', 'Nunito', 'Trebuchet MS', system-ui, sans-serif;
+  --fonte-texto: 'Figtree', 'Nunito', 'Segoe UI', system-ui, sans-serif;
+
+  /* Octógono da marca (placa de parada). */
+  --octogono: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
+}

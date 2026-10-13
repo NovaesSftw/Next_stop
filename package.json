@@ -1,0 +1,11 @@
+{
+  "name": "next-stop",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Next Stop: plataforma de cursos gamificada, com lições curtas, XP, sequência diária e vidas.",
+  "scripts": {
+    "dev": "python3 -m http.server 5173",
+    "test": "node --test tests/*.test.js"
+  }
+}
