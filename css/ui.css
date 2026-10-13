@@ -1,0 +1,350 @@
+/* Componentes reutilizáveis: botões "de borracha", cartões, indicadores, barras, diálogos e avisos. */
+
+/* ---------- botões ---------- */
+.btn {
+  --bg: var(--giz);
+  --fg: var(--marinho);
+  --edge: var(--linha-forte);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 52px;
+  padding: 0 1.6rem;
+  border: 0;
+  border-radius: 16px;
+  background: var(--bg);
+  color: var(--fg);
+  font: 600 1.05rem/1 var(--fonte-titulo);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 5px 0 var(--edge);
+  transition: transform 0.08s, box-shadow 0.08s, filter 0.15s;
+}
+
+.btn:hover {
+  filter: brightness(1.04);
+}
+
+.btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 var(--edge);
+}
+
+.btn--sol {
+  --bg: var(--sol);
+  --edge: var(--sol-borda);
+}
+
+.btn--navy {
+  --bg: var(--marinho);
+  --fg: #fff;
+  --edge: var(--marinho-borda);
+}
+
+.btn--ghost {
+  --bg: #fff;
+  --edge: var(--linha-forte);
+  border: 2px solid var(--linha);
+}
+
+.btn--verde {
+  --bg: var(--verde-botao);
+  --fg: #fff;
+  --edge: var(--verde-borda);
+}
+
+.btn--coral {
+  --bg: var(--coral-botao);
+  --fg: #fff;
+  --edge: var(--coral-borda);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn--small {
+  min-height: 42px;
+  padding: 0 1.1rem;
+  font-size: 0.95rem;
+  border-radius: 13px;
+  box-shadow: 0 4px 0 var(--edge);
+}
+
+.btn[disabled],
+.btn[aria-disabled='true'] {
+  --bg: var(--linha);
+  --fg: #66729a;
+  --edge: var(--linha-forte);
+  cursor: not-allowed;
+  filter: none;
+}
+
+.btn[disabled]:active {
+  transform: none;
+  box-shadow: 0 5px 0 var(--edge);
+}
+
+.iconbtn {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--marinho-3);
+  cursor: pointer;
+}
+
+.iconbtn:hover {
+  background: var(--fundo);
+  color: var(--marinho);
+}
+
+.iconbtn .icon {
+  width: 26px;
+  height: 26px;
+}
+
+/* ---------- cartões ---------- */
+.card {
+  background: #fff;
+  border: 2px solid var(--linha);
+  border-radius: var(--raio-m);
+  padding: 20px;
+  box-shadow: 0 4px 0 var(--linha);
+}
+
+.card__title {
+  font-size: 1.15rem;
+  margin-bottom: 12px;
+}
+
+/* ---------- indicadores (sequência, XP, vidas) ---------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px 6px 8px;
+  border-radius: 999px;
+  font: 700 1.05rem/1 var(--fonte-titulo);
+  color: var(--marinho);
+  background: #fff;
+  border: 2px solid var(--linha);
+}
+
+.pill .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.pill--flame .icon,
+.is-flame {
+  color: var(--laranja);
+}
+
+.pill--xp .icon,
+.is-xp {
+  color: var(--sol-borda);
+}
+
+.pill--heart .icon,
+.is-heart {
+  color: var(--coral);
+}
+
+.pill--dim .icon {
+  color: var(--linha-forte);
+}
+
+/* ---------- barra de progresso ---------- */
+.bar {
+  position: relative;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--linha);
+  overflow: hidden;
+}
+
+.bar__fill {
+  position: relative;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--sol);
+  transition: width 0.4s ease;
+}
+
+.bar__fill::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 4px;
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* ---------- campos ---------- */
+.field {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--linha);
+  border-bottom-width: 4px;
+  border-radius: 16px;
+  background: #fff;
+  font: 600 1.15rem/1.3 var(--fonte-texto);
+  color: var(--marinho);
+}
+
+.field::placeholder {
+  color: #8591b0;
+  font-weight: 500;
+}
+
+.field:focus {
+  outline: none;
+  border-color: var(--marinho);
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  font: 600 1rem var(--fonte-titulo);
+}
+
+/* ---------- placa octogonal "3D" (marca) ---------- */
+.octo {
+  --face: var(--sol);
+  --ring: #fff;
+  --edge: var(--sol-borda);
+  --size: 56px;
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: var(--size);
+  height: var(--size);
+  flex: none;
+}
+
+.octo__base,
+.octo__face {
+  position: absolute;
+  inset: 0;
+  clip-path: var(--octogono);
+}
+
+.octo__base {
+  background: var(--edge);
+  transform: translateY(4px);
+}
+
+.octo__face {
+  display: grid;
+  place-items: center;
+  background: var(--face);
+  color: var(--marinho);
+  font: 700 calc(var(--size) * 0.3) var(--fonte-titulo);
+}
+
+.octo__face::before,
+.octo__face::after {
+  content: '';
+  position: absolute;
+  clip-path: var(--octogono);
+}
+
+.octo__face::before {
+  inset: calc(var(--size) * 0.08);
+  background: var(--ring);
+}
+
+.octo__face::after {
+  inset: calc(var(--size) * 0.15);
+  background: var(--face);
+}
+
+.octo__inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+}
+
+.octo--muted {
+  --face: #e6eaf4;
+  --ring: #f4f6fb;
+  --edge: #c9d1e5;
+}
+
+.octo--muted .octo__face {
+  color: #7f8baa;
+}
+
+/* ---------- diálogo e aviso ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(20, 35, 75, 0.55);
+}
+
+.dialog {
+  width: min(420px, 100%);
+  padding: 28px 24px 24px;
+  border-radius: var(--raio-g);
+  background: #fff;
+  box-shadow: 0 8px 0 rgba(10, 18, 48, 0.25);
+  animation: dialog-in 0.18s ease-out;
+}
+
+.dialog__title {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.dialog__body {
+  color: var(--marinho-3);
+  margin-bottom: 24px;
+}
+
+.dialog__actions {
+  display: grid;
+  gap: 12px;
+}
+
+@keyframes dialog-in {
+  from {
+    transform: translateY(10px) scale(0.97);
+    opacity: 0;
+  }
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 96px;
+  z-index: 60;
+  max-width: min(420px, calc(100vw - 32px));
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: var(--marinho);
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  transform: translate(-50%, 16px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}

@@ -1,0 +1,421 @@
+/* Tela da lição: cabeçalho com progresso, exercício, barra de resposta. */
+.lesson {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: #fff;
+}
+
+.lesson__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px 20px;
+}
+
+.lesson__head .bar {
+  flex: 1;
+}
+
+.lesson__hearts {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 700 1.2rem/1 var(--fonte-titulo);
+  color: var(--coral-texto);
+}
+
+.lesson__hearts .icon {
+  width: 28px;
+  height: 28px;
+  color: var(--coral);
+}
+
+.lesson__body {
+  flex: 1;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 12px 20px 40px;
+}
+
+.prompt {
+  margin-bottom: 24px;
+  font-size: clamp(1.5rem, 3.2vw, 1.85rem);
+  line-height: 1.25;
+}
+
+.sentence {
+  margin-bottom: 28px;
+  font: 600 1.4rem/1.7 var(--fonte-titulo);
+  white-space: pre-wrap;
+}
+
+.blank {
+  display: inline-block;
+  min-width: 96px;
+  margin: 0 4px;
+  padding: 0 8px;
+  border-bottom: 3px solid var(--marinho);
+  text-align: center;
+}
+
+.blank.is-right {
+  color: var(--verde-texto);
+  border-color: var(--verde);
+}
+
+.blank.is-wrong {
+  color: var(--coral-texto);
+  border-color: var(--coral);
+}
+
+/* ---------- opções (múltipla escolha, lacuna, peças) ---------- */
+.opts {
+  display: grid;
+  gap: 12px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.opt {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--linha);
+  border-bottom-width: 5px;
+  border-radius: 16px;
+  background: #fff;
+  color: var(--marinho);
+  font: 600 1.05rem/1.3 var(--fonte-texto);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s;
+}
+
+.opt:hover {
+  background: var(--fundo);
+}
+
+.opt:active {
+  border-bottom-width: 2px;
+  transform: translateY(3px);
+}
+
+.opt.is-selected {
+  border-color: var(--marinho);
+  background: var(--sol-fundo);
+}
+
+.opt.is-right {
+  border-color: var(--verde);
+  background: var(--verde-fundo);
+  color: var(--verde-texto);
+}
+
+.opt.is-wrong {
+  border-color: var(--coral);
+  background: var(--coral-fundo);
+  color: var(--coral-texto);
+}
+
+.opt[disabled] {
+  cursor: default;
+}
+
+.opt__key {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--linha);
+  border-radius: 8px;
+  color: var(--marinho-3);
+  font: 700 0.85rem var(--fonte-titulo);
+}
+
+.opt.is-selected .opt__key {
+  border-color: var(--marinho);
+  color: var(--marinho);
+}
+
+.opt__text {
+  flex: 1;
+}
+
+.opt__mark .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.chip {
+  width: auto;
+  justify-content: center;
+  padding: 12px 22px;
+}
+
+.field.is-right {
+  border-color: var(--verde);
+  background: var(--verde-fundo);
+  color: var(--verde-texto);
+}
+
+.field.is-wrong {
+  border-color: var(--coral);
+  background: var(--coral-fundo);
+  color: var(--coral-texto);
+}
+
+/* ---------- montar a frase ---------- */
+.slots {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 10px;
+  min-height: 84px;
+  margin-bottom: 24px;
+  padding: 14px 0;
+  border-top: 2px solid var(--linha);
+  border-bottom: 2px solid var(--linha);
+}
+
+.slots:empty::before {
+  content: 'Toque nas peças para montar a resposta';
+  align-self: center;
+  color: #66729a;
+}
+
+.bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.tile {
+  width: auto;
+  padding: 10px 18px;
+}
+
+.tile.is-used {
+  visibility: hidden;
+}
+
+/* ---------- resposta digitada ---------- */
+.answer-input {
+  font-size: 1.4rem;
+}
+
+/* ---------- ligar pares ---------- */
+.pairs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.pairs__col {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.pair {
+  justify-content: center;
+  min-height: 64px;
+  text-align: center;
+}
+
+.pair.is-matched {
+  border-color: var(--verde);
+  background: var(--verde-fundo);
+  color: var(--verde-texto);
+  cursor: default;
+}
+
+.pair.is-flash {
+  border-color: var(--coral);
+  background: var(--coral-fundo);
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+/* ---------- barra de resposta ---------- */
+.lesson__foot {
+  border-top: 2px solid var(--linha);
+  padding: 16px 20px calc(16px + env(safe-area-inset-bottom));
+  background: #fff;
+}
+
+.lesson__foot.is-correct {
+  background: var(--verde-fundo);
+  border-color: var(--verde-fundo);
+}
+
+.lesson__foot.is-wrong {
+  background: var(--coral-fundo);
+  border-color: var(--coral-fundo);
+}
+
+.lesson__foot-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.feedback {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 56px;
+}
+
+.feedback .mascot {
+  width: 64px;
+  flex: none;
+}
+
+.feedback__title {
+  font: 600 1.35rem/1.1 var(--fonte-titulo);
+}
+
+.feedback__text {
+  margin-top: 2px;
+  font-size: 0.98rem;
+}
+
+.is-correct .feedback__title,
+.is-correct .feedback__text {
+  color: var(--verde-texto);
+}
+
+.is-wrong .feedback__title,
+.is-wrong .feedback__text {
+  color: var(--coral-texto);
+}
+
+.lesson__foot .btn {
+  min-width: 170px;
+}
+
+@media (max-width: 640px) {
+  .lesson__foot-in {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lesson__foot .btn {
+    width: 100%;
+  }
+
+  .feedback .mascot {
+    width: 52px;
+  }
+}
+
+/* ---------- tela final ---------- */
+.result {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+  text-align: center;
+}
+
+.result .mascot {
+  width: 190px;
+}
+
+.result__title {
+  font-size: clamp(1.9rem, 5vw, 2.4rem);
+}
+
+.result__text {
+  max-width: 40ch;
+  color: var(--marinho-3);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+  margin: 12px 0;
+}
+
+.stat {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 14px 8px;
+  border: 2px solid var(--linha);
+  border-radius: 16px;
+  box-shadow: 0 3px 0 var(--linha);
+}
+
+.stat__value {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font: 700 1.5rem/1 var(--fonte-titulo);
+}
+
+.stat__value .icon {
+  width: 26px;
+  height: 26px;
+}
+
+.stat__label {
+  color: var(--marinho-3);
+  font-size: 0.9rem;
+}
+
+.result__list {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.result__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 2px solid var(--sol);
+  border-radius: 16px;
+  background: var(--sol-fundo);
+  font-weight: 600;
+}
+
+.result__actions {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+}

@@ -1,0 +1,272 @@
+/* Trilha de aprendizado: uma estrada com paradas (placas octogonais) em cada lição. */
+.course-head {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.course-head__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.course-head__title {
+  font-size: 1.35rem;
+}
+
+.course-head__meta {
+  color: var(--marinho-3);
+  font-size: 0.95rem;
+}
+
+.unit {
+  margin-bottom: 28px;
+}
+
+.unit-banner {
+  display: grid;
+  gap: 2px;
+  padding: 16px 20px;
+  border-radius: 20px;
+  background: var(--marinho);
+  color: #fff;
+  box-shadow: 0 5px 0 var(--marinho-borda);
+}
+
+.unit-banner__tag {
+  color: var(--sol);
+  font: 600 0.95rem var(--fonte-titulo);
+}
+
+.unit-banner__title {
+  font-size: 1.4rem;
+}
+
+.unit-banner__sub {
+  color: #c9d3ee;
+  font-size: 0.95rem;
+}
+
+.route {
+  position: relative;
+  width: min(100%, 360px);
+  margin: 0 auto;
+}
+
+.route__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.road {
+  fill: none;
+  stroke: var(--linha);
+  stroke-width: 46px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.road-line {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 4px;
+  stroke-dasharray: 2 14;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+/* ---------- parada (lição) ---------- */
+.stop {
+  --face: var(--sol);
+  --ring: #fff;
+  --edge: var(--sol-borda);
+  --ink: var(--marinho);
+  --size: 76px;
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+
+.stop__base,
+.stop__face,
+.stop__pulse {
+  position: absolute;
+  inset: 0;
+  clip-path: var(--octogono);
+}
+
+.stop__base {
+  background: var(--edge);
+  transform: translateY(7px);
+}
+
+.stop__face {
+  display: grid;
+  place-items: center;
+  background: var(--face);
+  transition: transform 0.08s;
+}
+
+.stop__face::before,
+.stop__face::after {
+  content: '';
+  position: absolute;
+  clip-path: var(--octogono);
+}
+
+.stop__face::before {
+  inset: 6px;
+  background: var(--ring);
+}
+
+.stop__face::after {
+  inset: 12px;
+  background: var(--face);
+}
+
+.stop__icon {
+  position: relative;
+  z-index: 2;
+}
+
+.stop__icon .icon {
+  width: 32px;
+  height: 32px;
+}
+
+.stop:active .stop__face {
+  transform: translateY(5px);
+}
+
+.stop__label {
+  position: absolute;
+  top: calc(100% + 16px);
+  left: 50%;
+  width: 150px;
+  transform: translateX(-50%);
+  color: var(--marinho);
+  font: 600 0.95rem/1.2 var(--fonte-titulo);
+  text-align: center;
+  pointer-events: none;
+}
+
+.stop--locked {
+  --face: #e6eaf4;
+  --ring: #f4f6fb;
+  --edge: #c9d1e5;
+  --ink: #7f8baa;
+  cursor: not-allowed;
+}
+
+.stop--locked .stop__label {
+  color: #66729a;
+}
+
+.stop--current {
+  --size: 92px;
+}
+
+.stop--current .stop__icon .icon {
+  width: 38px;
+  height: 38px;
+}
+
+.stop__pulse {
+  background: rgba(255, 200, 0, 0.45);
+  animation: pulse 2s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.stop__bubble {
+  position: absolute;
+  bottom: calc(100% + 16px);
+  left: 50%;
+  padding: 6px 16px;
+  border: 2px solid var(--linha);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 3px 0 var(--linha);
+  color: var(--marinho);
+  font: 700 1rem var(--fonte-titulo);
+  white-space: nowrap;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.stop__bubble::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  width: 14px;
+  height: 14px;
+  border-right: 2px solid var(--linha);
+  border-bottom: 2px solid var(--linha);
+  background: #fff;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.stop__mascot {
+  position: absolute;
+  top: 50%;
+  width: 104px;
+  transform: translateY(-58%);
+  pointer-events: none;
+}
+
+.stop__mascot--right {
+  left: calc(100% + 14px);
+}
+
+.stop__mascot--left {
+  right: calc(100% + 14px);
+}
+
+@media (max-width: 440px) {
+  .stop__mascot {
+    display: none;
+  }
+}
+
+/* ---------- fim da linha ---------- */
+.finish {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 24px 16px 8px;
+  text-align: center;
+}
+
+.finish .mascot {
+  width: 150px;
+}
+
+.finish__title {
+  font-size: 1.5rem;
+}
+
+.finish__text {
+  color: var(--marinho-3);
+}
